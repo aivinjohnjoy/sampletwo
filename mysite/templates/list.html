@@ -1,0 +1,40 @@
+{% extends "header.html" %}
+
+{% block codeblock %}
+
+<h1>List</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      
+      <th>Title</th>
+      <th>Summary</th>
+      <th>Year</th>
+      <th>Success</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for movie_obj in movies %}
+    <tr>
+      <td>{{ movie_obj.Title | upper }}</td>
+      <td>{{ movie_obj.Summary | default:'No data available' }}</td>
+      <td>{{ movie_obj.Year }}</td>
+      <td>
+        {% if movie_obj.Success %}
+          Success
+        {% else %}
+          Failure
+        {% endif %}
+      </td>
+      <td>
+        <a href="/edit/{{ movie_obj.id}}">Edit</a> |
+        <a href="/delete/{{ movie_obj.id}}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

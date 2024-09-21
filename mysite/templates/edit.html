@@ -1,0 +1,37 @@
+{% extends "header.html" %}
+
+{% block codeblock %}
+
+
+<h1>Edit</h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Title: <input type="text", name="Title", value="{{movie.Title}}">
+    <br>
+    <br>
+    Year: <input type="text", name="Year", value="{{movie.Year}}">
+    <br>
+    <br>
+    Summary: <input type="text", name="sum" value="{{movie.Summary}}">
+    <br>
+    <br>
+    Success: <input, name="success">
+    <br>
+    <label for="success_yes">Yes:</label>
+    <input type="radio" id="success_yes" name="success" value="yes" {% if movie.Success %}checked{% endif %}> 
+    <br>
+    <label for="success_no">No:</label>
+    <input type="radio" id="success_no" name="success" value="no" {% if not movie.Success %}checked{% endif %}>
+
+    <br>
+    <br>
+    <button type="submit"> Save </button>
+
+</form>
+
+
+{% endblock %}
+
+
