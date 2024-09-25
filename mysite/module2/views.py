@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from . models import moovie_tablepy
 
+
 # Create your views here.
 
 #list api
@@ -33,9 +34,13 @@ def add(request):
             success_post=False
         else:
             success_post= False
+        
+        img_post=request.FILES.get('filename')
 
-        print(title_post,year_post,sum_post,success_post)
-        movie_tablepy_obj=moovie_tablepy(Title=title_post,Year=year_post,Summary=sum_post,Success=success_post)
+
+
+        print(img_post)
+        movie_tablepy_obj=moovie_tablepy(Title=title_post,Year=year_post,Summary=sum_post,Success=success_post,Img=img_post)
         movie_tablepy_obj.save()
 
     return render(request,'add.html')
@@ -59,6 +64,7 @@ def edit(request,pk):
             success_post=False
         else:
             success_post= False
+        img_post=request.FILES.get('filename')
 
         
         movie_tablepy_obj=moovie_tablepy.objects.get(id=pk)
@@ -66,6 +72,7 @@ def edit(request,pk):
         movie_tablepy_obj.Year=year_post
         movie_tablepy_obj.Summary=sum_post
         movie_tablepy_obj.Success=success_post
+        movie_tablepy_obj.Img=img_post
         movie_tablepy_obj.save()
         print(movie_tablepy_obj)
         movie_data= moovie_tablepy.objects.all()

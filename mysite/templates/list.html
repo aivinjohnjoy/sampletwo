@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th>Sl. No.</th>
+      <th>Poster</th>
       <th>Title</th>
       <th>Summary</th>
       <th>Year</th>
@@ -19,6 +20,7 @@
     {% for movie_obj in movies %}
       <tr>
         <td>{{ forloop.counter }}</td> 
+        <td><img src="/media/{{movie_obj.Img}}" alt="Uploaded Image" style="max-width: 100px; max-height: 100px;"> </td> 
         <td>{{ movie_obj.Title | upper }}</td>
         <td>{{ movie_obj.Summary | default:'No data available' }}</td>
         <td>{{ movie_obj.Year }}</td>

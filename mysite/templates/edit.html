@@ -2,36 +2,53 @@
 
 {% block codeblock %}
 
-
 <h1>Edit</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-    Title: <input type="text", name="Title", value="{{movie.Title}}">
-    <br>
-    <br>
-    Year: <input type="text", name="Year", value="{{movie.Year}}">
-    <br>
-    <br>
-    Summary: <input type="text", name="sum" value="{{movie.Summary}}">
-    <br>
-    <br>
-    Success: <input, name="success">
+    Title: <input type="text" name="Title" value="{{ movie.Title }}">
+    <br><br>
+    Year: <input type="text" name="Year" value="{{ movie.Year }}">
+    <br><br>
+    Summary: <input type="text" name="sum" value="{{ movie.Summary }}">
+    <br><br>
+    Success: <input name="success">
     <br>
     <label for="success_yes">Yes:</label>
-    <input type="radio" id="success_yes" name="success" value="yes" {% if movie.Success %}checked{% endif %}> 
+    <input type="radio" id="success_yes" name="success" value="yes" {% if movie.Success %}checked{% endif %}>
     <br>
     <label for="success_no">No:</label>
     <input type="radio" id="success_no" name="success" value="no" {% if not movie.Success %}checked{% endif %}>
 
-    <br>
-    <br>
-    <button type="submit"> Save </button>
+    <br><br>
 
+    <!-- Existing Image Preview -->
+    <img id="image-preview" src="/media/{{ movie.Img }}" alt="" width="60" height="60">
+    <br><br>
+
+    <!-- File input to upload a new image -->
+    <input type="file" name="filename" id="image-input" accept="image/*">
+
+    <br><br>
+    <button type="submit">Save</button>
 </form>
 
+<!-- JavaScript to preview the new image -->
+<script>
+    document.getElementById('image-input').onchange = function(event) {
+        const imageInput = event.target;
+        const imagePreview = document.getElementById('image-preview');
+
+        if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Replace the src of the image with the new file's data URL
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        }
+    };
+</script>
 
 {% endblock %}
-
-
