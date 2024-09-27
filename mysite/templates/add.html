@@ -26,12 +26,37 @@
 
     <br>
     <br>
-    <input type="file" name="filename">
+
+    <!-- Existing Image Preview -->
+    <img id="image-preview" src="" alt="" width="60" height="60">
+    <br>
+    <br>
+    
+    <input type="file" name="filename" id="image-input" accept="image/*">
     <br>
     <br>
     <button type="submit"> Add</button>
 
 </form>
+
+
+<!-- JavaScript to preview the new image -->
+<script>
+    document.getElementById('image-input').onchange = function(event) {
+        const imageInput = event.target;
+        const imagePreview = document.getElementById('image-preview');
+
+        if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Replace the src of the image with the new file's data URL
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        }
+    };
+</script>
+
 
 {% endblock %}
 

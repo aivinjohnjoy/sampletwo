@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+# Model to create a table moovie_tablepy in the DB
 class moovie_tablepy(models.Model):
     Title=models.CharField(max_length=100)
     Year=models.IntegerField()
